@@ -9,7 +9,6 @@ import EvidenceBadge from '../EvidenceBadge/EvidenceBadge'
 import Icon from '../Icon/Icon'
 import MarkdownContent from '../MarkdownContent/MarkdownContent'
 import ReferenceList from '../ReferenceList/ReferenceList'
-import SafetyNotice from '../SafetyNotice/SafetyNotice'
 
 function formatDate(iso: string) {
   const [y, m, d] = iso.split('-').map(Number)
@@ -73,20 +72,9 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
 
       <div className="container article-body">
         <div className="article-main">
-          {!item.reviewed && (
-            <p className="notice notice--warning" role="note">
-              <Icon name="alert" className="notice__icon" />
-              <span>
-                <strong>Em revisão:</strong> este conteúdo ainda não foi revisado por um profissional de saúde.
-              </span>
-            </p>
-          )}
-
           {item.image && (
             <img className="article__image" src={item.image} alt={item.imageAlt ?? ''} loading="lazy" />
           )}
-
-          {item.safetyNotice && <SafetyNotice />}
 
           <MarkdownContent>{item.body}</MarkdownContent>
 

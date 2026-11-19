@@ -13,7 +13,6 @@ separando o que é uso popular do que a pesquisa científica já confirmou.
 ![Vite](https://img.shields.io/badge/Vite-8-646cff?style=flat-square&logo=vite&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-7-3178c6?style=flat-square&logo=typescript&logoColor=white)
 ![Markdown](https://img.shields.io/badge/conte%C3%BAdo-Markdown-2f4f3a?style=flat-square&logo=markdown&logoColor=white)
-![Vercel](https://img.shields.io/badge/deploy-Vercel-000?style=flat-square&logo=vercel&logoColor=white)
 
 <br />
 
@@ -31,7 +30,6 @@ referências — e um selo que mostra **quanta evidência científica existe** p
 
 > [!IMPORTANT]
 > O conteúdo é educativo e **não substitui consulta com profissional de saúde**.
-> Artigos ainda não revisados aparecem com o aviso "Em revisão".
 
 ## ✨ Destaques
 
@@ -103,50 +101,14 @@ src/
 | `/busca?q=` | Resultados da pesquisa |
 | `/sobre` | Sobre o projeto |
 
-## ✍️ Adicionar um artigo
-
-1. Copie `src/content/_modelo-condicao.md` ou `src/content/_modelo-preparacao.md`.
-2. Salve em `src/content/conditions/<categoria>/<slug>.md` ou `src/content/preparations/<categoria>/<slug>.md`.
-3. Preencha o frontmatter e as seções. Use `published: true` para publicar.
-4. Rode `npm run dev` e confira. Erros de metadados aparecem no console do navegador como `[conteúdo] ...`.
-
-<details>
-<summary><b>Regras de conteúdo</b></summary>
-
-- Arquivos que começam com `_` são modelos e nunca são publicados.
-- `category` precisa existir em `src/data/categories.ts`.
-- `related` liga condições e preparações pelo `slug`; basta indicar em um dos lados.
-- As seções "Preparações/Condições relacionadas" e "Referências" são geradas a partir do frontmatter — não as repita no texto.
-- `reviewed: false` exibe o aviso "Em revisão". Marque `true` só depois da revisão por profissional de saúde.
-- `safetyNotice: false` oculta o aviso "Conteúdo educativo" no topo do artigo.
-- Os títulos `##` do artigo viram o índice lateral "Nesta página" automaticamente.
-- Não invente doses, quantidades ou frequências. Sem fonte confiável, deixe a seção como pendente.
-- HTML dentro do Markdown não é interpretado (segurança).
-
-</details>
-
 <details>
 <summary><b>Decisões técnicas</b></summary>
 
 - **Frontmatter:** usamos o pacote `yaml` em vez de `gray-matter`, porque o `gray-matter` depende de APIs do Node (`Buffer`, `fs`) e quebra no navegador.
 - **Busca:** local, sem acentos e sem diferenciar maiúsculas; pesquisa título, nomes de plantas, palavras-chave, categoria e texto.
 - **Visual:** estilo "botânico editorial" em tema escuro — fontes Cormorant Garamond (títulos) e DM Sans (texto) via Google Fonts, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon` (cada categoria tem um `icon` em `data/categories.ts`).
-- **Vercel:** `vercel.json` redireciona todas as rotas para `index.html` (fallback de SPA).
 
 </details>
-
-## ☁️ Publicação (Vercel)
-
-1. Em [vercel.com/new](https://vercel.com/new), importe o repositório `rckhz/medicina-ancestral`.
-2. A Vercel detecta o Vite sozinha; confira os valores abaixo e clique em **Deploy**.
-3. A cada `git push` na branch `main`, o site é atualizado automaticamente.
-
-| Configuração | Valor |
-|---|---|
-| Framework | Vite |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Install command | `npm install` |
 
 ---
 
