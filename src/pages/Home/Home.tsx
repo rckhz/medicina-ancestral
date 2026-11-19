@@ -1,254 +1,140 @@
-import { useRef, type CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { evidenceLevels } from '../../data/categories'
+import CategoryCard from '../../components/CategoryCard/CategoryCard'
+import ContentCard from '../../components/ContentCard/ContentCard'
+import EvidenceBadge from '../../components/EvidenceBadge/EvidenceBadge'
+import Icon from '../../components/Icon/Icon'
+import Search from '../../components/Search/Search'
+import { categories, evidenceLevels } from '../../data/categories'
 import { useDocumentTitle } from '../../hooks/useDocumentTitle'
+import { countByCategory, getContent } from '../../lib/content'
 import type { EvidenceLevel } from '../../types/content'
 
-/* Plano da página (design-taste-frontend, serviço):
-   hero split (1 tela) · #herbario carrossel de plantas (rolagem horizontal, sem travar a página)
-   · #chas split com a foto da camomila, fundo de superfície (1 tela) · #evidencias os cinco níveis (1 tela)
-   · footer.closing (1 tela). Movimento: entrada do hero e o hover do kit. */
+const suggestions = ['alho', 'alecrim', 'tosse', 'sono', 'digestão']
 
-const arrow = (
-  <svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true">
-    <path className="m-arrow__stem" d="M1 6h8" />
-    <path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" />
-  </svg>
-)
-
-function srcSet(id: string, big = false) {
-  const set = `/assets/img/photo-${id}-500.webp 500w, /assets/img/photo-${id}-960.webp 960w, /assets/img/photo-${id}.webp 1280w`
-  return big ? `${set}, /assets/img/photo-${id}-1920.webp 1920w` : set
+function SectionHead({ id, eyebrow, title, link }: { id: string; eyebrow: string; title: string; link?: { to: string; label: string } }) {
+  return (
+    <div className="section-head">
+      <div>
+        <p className="eyebrow">{eyebrow}</p>
+        <h2 id={id}>{title}</h2>
+      </div>
+      {link && (
+        <Link to={link.to} className="link-arrow">
+          {link.label} <Icon name="arrow" />
+        </Link>
+      )}
+    </div>
+  )
 }
-
-const chapters = [
-  {
-    id: 'f18122750',
-    slug: 'alho',
-    name: 'Alho',
-    latin: 'Allium sativum',
-    text: 'Estudado como coadjuvante no controle do colesterol e da pressão arterial leve. A evidência ainda é limitada.',
-    alt: 'Cabeça de alho aberta ao lado de um dente descascado, sobre fundo branco',
-    h: 962,
-  },
-  {
-    id: 'f113392846',
-    slug: 'alecrim',
-    name: 'Alecrim',
-    latin: 'Rosmarinus officinalis',
-    text: 'A Farmacopeia Brasileira indica o chá das folhas para má digestão. É uso tradicional, sem confirmação clínica.',
-    alt: 'Ramo de alecrim fresco com folhas finas, sobre fundo branco',
-    h: 960,
-  },
-  {
-    id: 'f132411089',
-    slug: 'cravo-da-india',
-    name: 'Cravo-da-índia',
-    latin: 'Syzygium aromaticum',
-    text: 'Botões florais secos do craveiro, usados na cozinha e em chás caseiros. Uso tradicional documentado.',
-    alt: 'Cravos-da-índia secos espalhados sobre fundo branco',
-    h: 889,
-  },
-]
-
-const teas = [
-  {
-    slug: 'cha-de-camomila',
-    name: 'Chá de camomila',
-    use: 'Flores secas, para relaxar e para desconfortos digestivos leves',
-    level: 'limited',
-    photo: 'f34783411',
-    alt: 'Flor de camomila com miolo amarelo e pétalas brancas entre folhas finas',
-  },
-  {
-    slug: 'cha-de-alecrim',
-    name: 'Chá de alecrim',
-    use: 'Folhas secas em infusão, para má digestão',
-    level: 'traditional',
-    photo: 'f195540995',
-    alt: 'Chá de ervas cor de âmbar numa tigela de vidro sobre fundo branco',
-  },
-] as const
 
 export default function Home() {
   useDocumentTitle()
-  const track = useRef<HTMLOListElement>(null)
-  const go = (dir: 1 | -1) => {
-    const el = track.current
-    if (!el) return
-    const step = (el.querySelector('li')?.clientWidth ?? el.clientWidth) + 24
-    el.scrollBy({ left: dir * step, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
-  }
+  const preparations = getContent('preparation')
+  const plants = preparations.filter((p) => p.category === 'plantas-medicinais')
+  const others = preparations.filter((p) => p.category !== 'plantas-medicinais')
 
   return (
     <>
-      <section className="hero hero--split ground-inverse" data-enter aria-labelledby="hero-h">
-        <div className="wrap">
-          <div className="hero-text grid hero__grid">
-            <div className="hero__text span-5">
-              <p className="hero__kicker">Conteúdo educativo. Em emergência, ligue 192.</p>
-              <h1 id="hero-h">Guia de plantas medicinais e chás caseiros</h1>
-              <p className="hero__lead">
-                6 fichas revisadas, com preparo, contraindicações e referências. Um selo em cada uso separa a tradição
-                do que os estudos já confirmaram.
-              </p>
-              <div className="btn-row">
-                <a className="btn btn--primary" href="/preparacoes?categoria=plantas-medicinais">
-                  Ver as plantas
-                  {arrow}
-                </a>
-                <a className="btn btn--secondary" href="#evidencias">
-                  Ler os níveis de evidência
-                </a>
-              </div>
-            </div>
-            <figure className="hero__figure span-6 start-7">
-            <div className="hero__media">
-              <picture>
-                <source srcSet="/images/hero-babosa.webp" type="image/webp" />
-                <img
-                  src="/images/hero-babosa.jpg"
-                  alt="Folhas grossas de babosa com bordas serrilhadas e gotas de água"
-                  width="2400"
-                  height="1600"
-                  style={{ '--ly-pos': '40% 50%' } as CSSProperties}
-                  fetchPriority="high"
-                  data-source="client"
-                  data-subject="babosa"
-                />
-              </picture>
-            </div>
-            <figcaption className="hero__caption">
-              <i>Aloe vera</i> (L.) Burm.f., babosa
-            </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section className="section" id="herbario" aria-labelledby="herbario-h">
-        <div className="wrap">
-          <div className="herb__head">
-            <div>
-              <h2 id="herbario-h">Plantas do herbário</h2>
-              <p>Cada ficha traz o nome científico, as partes usadas, o modo de preparo e quem deve evitar a planta.</p>
-            </div>
-            <div className="herb__nav">
-              <button type="button" className="herb__btn" onClick={() => go(-1)} aria-label="Planta anterior">
-                <span aria-hidden="true">←</span>
-              </button>
-              <button type="button" className="herb__btn" onClick={() => go(1)} aria-label="Próxima planta">
-                <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </div>
-          <ol className="herb__track" ref={track} tabIndex={0} aria-label="Plantas do herbário">
-            {chapters.map((c) => (
-              <li className="herb__slide" key={c.slug}>
-                <figure className="herb__pic">
-                  <img
-                    src={`/assets/img/photo-${c.id}.webp`}
-                    srcSet={srcSet(c.id)}
-                    sizes="(max-width: 639px) 86vw, (max-width: 1023px) 60vw, 700px"
-                    width="1280"
-                    height={c.h}
-                    alt={c.alt}
-                    loading="lazy"
-                    decoding="async"
-                    data-source="stand-in"
-                    data-subject={c.name}
-                  />
-                </figure>
-                <h3>
-                  <Link to={`/preparacoes/${c.slug}`}>{c.name}</Link>
-                </h3>
-                <p className="herb__latin">{c.latin}</p>
-                <p>{c.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="section ground-surface" id="chas" aria-labelledby="chas-h">
-        <div className="wrap">
-          <div className="section-head">
-            <h2 id="chas-h">
-              Chás e infusões. <span className="muted">Com quantidade, água e tempo de infusão.</span>
-            </h2>
-          </div>
-          <div className="grid">
-            {teas.map((t) => (
-              <Link className="tile span-6 tea" to={`/preparacoes/${t.slug}`} key={t.slug}>
-                <div className="tile__media">
-                  <img
-                    src={`/assets/img/photo-${t.photo}.webp`}
-                    srcSet={srcSet(t.photo)}
-                    sizes="(max-width: 1023px) 100vw, 628px"
-                    width="1280"
-                    height="960"
-                    alt={t.alt}
-                    loading="lazy"
-                    decoding="async"
-                    data-source="stand-in"
-                    data-subject={t.name}
-                  />
-                </div>
-                <div className="tile__head">
-                  <h3>{t.name}</h3>
-                  <span className="tile__price">{evidenceLevels[t.level].label}</span>
-                </div>
-                <p className="tile__facts">{t.use}</p>
+      <section className="hero">
+        <picture>
+          <source srcSet="/images/hero-babosa.webp" type="image/webp" />
+          <img className="hero__bg" src="/images/hero-babosa.jpg" alt="" aria-hidden="true" fetchPriority="high" />
+        </picture>
+        <div className="container hero__inner">
+          <p className="eyebrow">Plantas medicinais · Chás · Cuidados naturais</p>
+          <h1 className="hero__title">
+            Medicina <em>Ancestral</em>
+          </h1>
+          <p className="hero__tagline">Saberes das plantas, com ciência e cuidado.</p>
+          <p className="lead">
+            Informações em linguagem simples sobre plantas medicinais, preparações tradicionais e condições de
+            saúde — separando o que é uso popular do que a pesquisa científica já confirmou.
+          </p>
+          <Search variant="hero" />
+          <p className="hero__chips">
+            <span>Experimente:</span>
+            {suggestions.map((s) => (
+              <Link key={s} to={`/busca?q=${encodeURIComponent(s)}`} className="chip">
+                {s}
               </Link>
             ))}
-          </div>
+          </p>
         </div>
       </section>
 
-      <section className="section" id="evidencias" aria-labelledby="evidencias-h">
-        <div className="wrap">
-          <div className="section-head">
-            <h2 id="evidencias-h">
-              Cinco níveis de evidência. <span className="muted">O nível vale para um uso, não para a planta toda.</span>
-            </h2>
+      <div className="container page home">
+        {plants.length > 0 && (
+          <section aria-labelledby="h-plantas" className="home__section">
+            <SectionHead
+              id="h-plantas"
+              eyebrow="Herbário"
+              title="Plantas medicinais"
+              link={{ to: '/preparacoes?categoria=plantas-medicinais', label: 'Ver todas as plantas' }}
+            />
+            <div className="grid">
+              {plants.map((item) => (
+                <ContentCard key={item.slug} item={item} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {others.length > 0 && (
+          <section aria-labelledby="h-preparacoes" className="home__section">
+            <SectionHead
+              id="h-preparacoes"
+              eyebrow="Receitas tradicionais"
+              title="Chás e preparações"
+              link={{ to: '/preparacoes', label: 'Ver todas as preparações' }}
+            />
+            <div className="grid">
+              {others.map((item) => (
+                <ContentCard key={item.slug} item={item} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="h-categorias" className="home__section">
+          <SectionHead
+            id="h-categorias"
+            eyebrow="Para cada necessidade"
+            title="Condições por categoria"
+            link={{ to: '/categorias', label: 'Ver todas as categorias' }}
+          />
+          <div className="category-grid">
+            {categories
+              .filter((c) => c.type === 'condition' && countByCategory(c.type, c.slug) > 0)
+              .map((c) => (
+                <CategoryCard key={c.slug} category={c} />
+              ))}
           </div>
-          <div className="grid">
-            <div className="span-6">
-          <dl className="levels">
+        </section>
+
+        <section aria-labelledby="h-evidencias" className="home__section evidence-panel">
+          <div className="evidence-panel__intro">
+            <p className="eyebrow">Transparência</p>
+            <h2 id="h-evidencias">Como ler as evidências</h2>
+            <p>
+              Cada uso recebe uma classificação, considerando a finalidade específica — não apenas a planta.
+              Assim fica claro o que é tradição e o que já foi confirmado por estudos.
+            </p>
+            <Link to="/sobre" className="link-arrow">
+              Saiba mais sobre o projeto <Icon name="arrow" />
+            </Link>
+          </div>
+          <dl className="evidence-legend">
             {(Object.keys(evidenceLevels) as EvidenceLevel[]).map((level) => (
-              <div className="levels__row" key={level}>
+              <div key={level}>
                 <dt>
-                  {evidenceLevels[level].label}
-                  <span className={`level-dot level-dot--${level}`} aria-hidden="true" />
+                  <EvidenceBadge level={level} />
                 </dt>
                 <dd>{evidenceLevels[level].meaning}</dd>
               </div>
             ))}
           </dl>
-          <p className="levels__more">
-            <Link className="link" to="/sobre">
-              Ler sobre as fontes
-            </Link>
-          </p>
-            </div>
-            <div className="span-6 start-7">
-              <picture className="levels__photo">
-                <source srcSet="/images/hero.webp" type="image/webp" />
-                <img
-                  src="/images/hero.jpg"
-                  alt="Ervas secas e flores em tigelas de madeira, com um pilão branco, sobre uma mesa"
-                  width="984"
-                  height="656"
-                  loading="lazy"
-                  decoding="async"
-                  data-source="client"
-                  data-subject="ervas secas"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   )
 }

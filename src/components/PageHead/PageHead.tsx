@@ -10,7 +10,7 @@ interface Props {
 export default function PageHead({ eyebrow, title, children }: Props) {
   return (
     <header className="page-head">
-      <div className="ma-wrap">
+      <div className="container">
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {children}

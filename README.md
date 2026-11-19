@@ -42,8 +42,7 @@ referências — e um selo que mostra **quanta evidência científica existe** p
 | 📑 **Índice automático** | Os títulos do artigo viram o menu lateral "Nesta página". |
 | ⚠️ **Avisos de segurança** | Contraindicações, efeitos adversos e interações medicamentosas em destaque. |
 | 🔗 **Conteúdo conectado** | Plantas ligam às condições em que são usadas, e vice-versa. |
-| 🎞️ **Movimento** | O título da página inicial entra linha a linha e o herbário troca as fotos das plantas conforme a rolagem. |
-| 📱 **Responsivo** | Tema claro (pedra e oliva), pensado para leitura no celular. |
+| 📱 **Responsivo** | Tema escuro botânico, pensado para leitura no celular. |
 | ✍️ **Fácil de editar** | Novos artigos são só arquivos Markdown — sem banco de dados, sem backend. |
 
 <div align="center">
@@ -72,7 +71,7 @@ npm run dev      # http://localhost:5173
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento com recarga automática |
-| `npm run build` | Checa os tipos, gera a versão final em `dist/` e pré-renderiza cada página em HTML |
+| `npm run build` | Checa os tipos e gera a versão final em `dist/` |
 | `npm run preview` | Serve o build localmente para teste |
 | `npm run lint` | Verifica o código com oxlint |
 
@@ -88,10 +87,7 @@ src/
 ├── data/         categories.ts — categorias e níveis de evidência
 ├── lib/          markdown.ts (frontmatter), content.ts (carregamento, validação, busca)
 ├── types/        content.ts
-├── entry-server.tsx  renderização no build (uma página HTML por rota)
-└── styles/       variables.css (paleta), global.css (páginas internas)
-public/assets/    kit de design: system.css/js, layout, motion, moments, fotos (img/)
-scripts/          prerender.mjs
+└── styles/       variables.css (paleta), global.css
 ```
 
 ### Rotas
@@ -134,10 +130,8 @@ scripts/          prerender.mjs
 
 - **Frontmatter:** usamos o pacote `yaml` em vez de `gray-matter`, porque o `gray-matter` depende de APIs do Node (`Buffer`, `fs`) e quebra no navegador.
 - **Busca:** local, sem acentos e sem diferenciar maiúsculas; pesquisa título, nomes de plantas, palavras-chave, categoria e texto.
-- **Visual:** feito com a skill *design-taste-frontend*: paleta olive-on-bone, fonte Instrument Sans e o kit dela em `public/assets` (grade, cabeçalho, rodapé, botões, entrada do hero e o momento `photo-chapters` do herbário). Os tokens ficam no `:root` do `index.html`; `src/styles/variables.css` liga os nomes antigos a eles.
-- **Pré-renderização:** `npm run build` gera um HTML pronto para cada rota (`dist/<rota>/index.html`); o React hidrata a página e só então carrega o kit (`src/lib/kit.ts`).
-- **Fotos:** as do herbário e dos chás vêm do Wikimedia Commons (créditos em `/creditos.html`); a babosa e as ervas secas são do projeto.
-- **Vercel:** arquivos estáticos têm prioridade; `vercel.json` manda o resto para `index.html` (fallback de SPA).
+- **Visual:** estilo "botânico editorial" em tema escuro — fontes Cormorant Garamond (títulos) e DM Sans (texto) via Google Fonts, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon` (cada categoria tem um `icon` em `data/categories.ts`).
+- **Vercel:** `vercel.json` redireciona todas as rotas para `index.html` (fallback de SPA).
 
 </details>
 

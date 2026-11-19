@@ -20,9 +20,3 @@ Thumbs.db
 /pisauikan-*.jpg
 /plantas-medicinais-arquivo-agencia-belem.webp
 /veja isso claude.txt
-
-# build da pré-renderização e arquivos de trabalho da skill de design
-dist-ssr/
-.taste-skill/
-public/.taste-skill/
-shots/

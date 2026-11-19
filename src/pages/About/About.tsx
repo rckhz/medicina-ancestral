@@ -14,7 +14,7 @@ export default function About() {
         medicinais, preparações caseiras e práticas tradicionais de cuidado.
       </p>
     </PageHead>
-    <div className="ma-wrap page prose prose--page">
+    <div className="container page prose prose--page">
       <p>
         A proposta é aproximar o conhecimento tradicional da pesquisa científica: mostrar o que é transmitido
         entre gerações e, ao lado, o que os estudos já conseguiram investigar. O objetivo não é substituir a
