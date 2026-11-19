@@ -33,7 +33,7 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
   return (
     <article className="article">
       <header className="article-hero">
-        <div className="container">
+        <div className="ma-wrap">
           <nav aria-label="Trilha de navegação" className="breadcrumb">
             <ol>
               <li>
@@ -71,7 +71,7 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
         </div>
       </header>
 
-      <div className="container article-body">
+      <div className="ma-wrap article-body">
         <div className="article-main">
           {!item.reviewed && (
             <p className="notice notice--warning" role="note">
@@ -93,7 +93,7 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
           {related.length > 0 && (
             <section aria-labelledby="relacionados" className="article__section">
               <h2 id="relacionados">{relatedTitle}</h2>
-              <div className="grid">
+              <div className="entry-grid">
                 {related.map((r) => (
                   <ContentCard key={`${r.type}:${r.slug}`} item={r} />
                 ))}
@@ -110,19 +110,21 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
         </div>
 
         <aside className="article-aside">
-          <nav aria-label="Nesta página" className="toc">
-            <p className="toc__title">Nesta página</p>
-            <ol>
-              {toc.map((h) => (
-                <li key={h.id}>
-                  <a href={`#${h.id}`}>{h.text}</a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-          <Link className="toc__back" to={`${info.basePath}${category ? `?categoria=${category.slug}` : ''}`}>
-            ← Ver mais em {category?.name ?? info.plural}
-          </Link>
+          <div className="article-aside__sticky">
+            <nav aria-label="Nesta página" className="toc">
+              <p className="toc__title">Nesta página</p>
+              <ol>
+                {toc.map((h) => (
+                  <li key={h.id}>
+                    <a href={`#${h.id}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            <Link className="toc__back" to={`${info.basePath}${category ? `?categoria=${category.slug}` : ''}`}>
+              ← Ver mais em {category?.name ?? info.plural}
+            </Link>
+          </div>
         </aside>
       </div>
     </article>

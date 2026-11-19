@@ -11,7 +11,7 @@ export default function Categories() {
         <p className="lead">Navegue pelos temas de saúde e pelos tipos de preparação.</p>
       </PageHead>
 
-      <div className="container page">
+      <div className="ma-wrap page">
         <section aria-labelledby="h-prep" className="home__section">
           <h2 id="h-prep">Plantas e preparações</h2>
           <div className="category-grid">

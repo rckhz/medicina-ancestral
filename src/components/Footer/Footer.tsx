@@ -1,44 +1,73 @@
-import { Link } from 'react-router-dom'
 import Logo from '../Logo/Logo'
 
+const arrow = (
+  <svg className="m-arrow" viewBox="0 0 12 12" aria-hidden="true">
+    <path className="m-arrow__stem" d="M1 6h8" />
+    <path className="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5" />
+  </svg>
+)
+
+/** A última tela: o fechamento (close-type) e o rodapé escuro (footer-dark) numa só seção. */
 export default function Footer() {
   return (
-    <footer className="site-footer">
-      <div className="container site-footer__grid">
-        <div className="site-footer__brand">
-          <Logo />
-          <p>Saberes das plantas medicinais e das preparações tradicionais, lidos com olhar científico.</p>
+    <footer className="footer closing footer--dark ground-inverse" id="contato" aria-labelledby="close-h">
+      <div className="wrap">
+        <div className="closing__cta close--type">
+          <div className="section-head">
+            <h2 id="close-h">Seis fichas de plantas e chás</h2>
+            <p>Cada ficha termina com as referências usadas, para você conferir na fonte.</p>
+          </div>
+          <a className="btn btn--primary btn--xl btn--wide" href="/preparacoes?categoria=plantas-medicinais">
+            Ver as plantas
+            {arrow}
+          </a>
         </div>
-
-        <nav aria-label="Rodapé">
-          <h2>Explorar</h2>
-          <ul>
-            <li><Link to="/preparacoes?categoria=plantas-medicinais">Plantas medicinais</Link></li>
-            <li><Link to="/preparacoes?categoria=infusoes">Chás e infusões</Link></li>
-            <li><Link to="/condicoes">Condições de saúde</Link></li>
-            <li><Link to="/categorias">Categorias</Link></li>
-            <li><Link to="/sobre">Sobre o projeto e fontes</Link></li>
-          </ul>
-        </nav>
-
-        <section aria-labelledby="aviso-geral" className="site-footer__notice">
-          <h2 id="aviso-geral">Aviso importante</h2>
-          <p>
-            Este site possui finalidade exclusivamente educativa e não substitui avaliação, diagnóstico ou
-            orientação de profissionais de saúde. Informações sobre plantas medicinais e preparações
-            tradicionais não representam necessariamente eficácia comprovada.
-          </p>
-          <p>
-            Não interrompa nem altere tratamentos prescritos por conta própria. Preparações naturais também
-            podem apresentar contraindicações, efeitos adversos e interações medicamentosas. Em caso de
-            sintomas intensos, persistentes ou sinais de urgência, procure atendimento profissional
-            (SAMU: 192).
-          </p>
-        </section>
-      </div>
-      <div className="container site-footer__bottom">
-        <p>Medicina Ancestral — projeto de educação em saúde.</p>
-        <p>SAMU: 192</p>
+        <div className="closing__links">
+          <div className="grid">
+            <div className="span-4 stack-4">
+              <Logo />
+              <p className="footer__lede">
+                Conteúdo educativo: não substitui consulta com profissional de saúde. Em emergência, ligue 192 (SAMU).
+              </p>
+            </div>
+            <div className="span-2 footer__col">
+              <h3>Plantas</h3>
+              <ul>
+                <li><a href="/preparacoes/alho">Alho</a></li>
+                <li><a href="/preparacoes/alecrim">Alecrim</a></li>
+                <li><a href="/preparacoes/agriao">Agrião</a></li>
+                <li><a href="/preparacoes/cravo-da-india">Cravo-da-índia</a></li>
+              </ul>
+            </div>
+            <div className="span-2 footer__col">
+              <h3>Chás</h3>
+              <ul>
+                <li><a href="/preparacoes/cha-de-camomila">Camomila</a></li>
+                <li><a href="/preparacoes/cha-de-alecrim">Alecrim</a></li>
+              </ul>
+            </div>
+            <div className="span-2 footer__col">
+              <h3>Condições</h3>
+              <ul>
+                <li><a href="/condicoes/resfriado-comum">Resfriado comum</a></li>
+                <li><a href="/condicoes/insonia">Insônia</a></li>
+                <li><a href="/condicoes">Todas as condições</a></li>
+              </ul>
+            </div>
+            <div className="span-2 footer__col">
+              <h3>Projeto</h3>
+              <ul>
+                <li><a href="/categorias">Categorias</a></li>
+                <li><a href="/busca">Busca</a></li>
+                <li><a href="/sobre">Fontes</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer__legal">
+            <span>&copy; 2026 Medicina Ancestral</span>
+            <a className="credits" href="/creditos.html">Fotografias via Wikimedia Commons</a>
+          </div>
+        </div>
       </div>
     </footer>
   )

@@ -18,14 +18,14 @@ export default function SearchResults() {
         <Search defaultValue={q} variant="hero" />
       </PageHead>
 
-      <div className="container page">
+      <div className="ma-wrap page">
         {q && (
           <>
             <p className="muted" aria-live="polite">
               {results.length} {results.length === 1 ? 'resultado encontrado' : 'resultados encontrados'}
             </p>
             {results.length > 0 ? (
-              <div className="grid">
+              <div className="entry-grid">
                 {results.map((item) => (
                   <ContentCard key={`${item.type}:${item.slug}`} item={item} />
                 ))}

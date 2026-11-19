@@ -14,26 +14,26 @@ export default function ContentCard({ item }: { item: ContentItem }) {
   const category = getCategory(item.type, item.category)
   const latin = scientificName(item)
   return (
-    <article className="card">
-      <div className="card__top">
-        <span className="card__icon">
+    <article className="entry-card">
+      <div className="entry-card__top">
+        <span className="entry-card__icon">
           <Icon name={category?.icon ?? 'leaf'} />
         </span>
-        <span className="card__eyebrow">{category?.name}</span>
+        <span className="entry-card__eyebrow">{category?.name}</span>
       </div>
       <h3>
-        <Link to={`${typeInfo[item.type].basePath}/${item.slug}`} className="card__link">
+        <Link to={`${typeInfo[item.type].basePath}/${item.slug}`} className="entry-card__link">
           {item.title}
         </Link>
       </h3>
-      {latin && <p className="card__latin">{latin}</p>}
-      <p className="card__desc">{item.description}</p>
+      {latin && <p className="entry-card__latin">{latin}</p>}
+      <p className="entry-card__desc">{item.description}</p>
       {item.evidence && (
-        <div className="card__foot">
+        <div className="entry-card__foot">
           <EvidenceBadge level={item.evidence} />
         </div>
       )}
-      <Icon name="arrow" className="card__arrow" />
+      <Icon name="arrow" className="entry-card__arrow" />
     </article>
   )
 }

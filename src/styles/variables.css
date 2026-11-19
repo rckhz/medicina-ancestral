@@ -1,47 +1,44 @@
+/*
+ * As cores e fontes vêm do kit (index.html: o bloco :root com --p-* e --font-*, sorteado pela skill
+ * design-taste-frontend: paleta olive-on-bone, Instrument Sans). Os nomes antigos abaixo apontam
+ * para esses tokens, para que as páginas internas sigam o mesmo sistema.
+ */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Paleta botânica — tema escuro */
-  --moss: #35523f;
-  --moss-deep: #1c2d23;
-  --leaf: #4f6f55;
-  --sage: #8fa886;
-  --sage-wash: #233229;
-  --gold: #cba45d;
-  --gold-soft: #dcc690;
-  --gold-wash: #2b2619;
-  --clay: #d38e63;
+  --moss: var(--p-ink);
+  --sage: color-mix(in oklab, var(--p-ink) 45%, var(--p-bg));
+  --sage-wash: color-mix(in oklab, var(--p-ink) 8%, var(--p-bg));
+  --moss-deep: var(--p-ink);
+  --gold-soft: var(--p-bg);
+  --gold: #8a5a12;
+  --gold-wash: color-mix(in oklab, #8a5a12 10%, var(--p-bg));
+  --clay: #8a5a12;
 
-  /* Uso semântico */
-  --bg: #111813;
-  --bg-deep: #0b100d;
-  --paper: #1b2620;
-  --surface: #17211b;
-  --text: #e4e1d6;
-  --text-muted: #a3aa9e;
-  --heading: #f2eee2;
-  --accent: #aecba3;
-  --link: #b6d4aa;
-  --border: #27342c;
-  --border-strong: #3a4b40;
-  --focus: #d9b25a;
+  --bg-deep: var(--p-surface);
+  --paper: var(--p-bg);
+  --text: #2c3410;
+  --text-muted: var(--p-muted);
+  --heading: var(--p-ink);
+  --link: var(--p-ink);
+  --border: color-mix(in oklab, var(--p-ink) 13%, transparent);
+  --border-strong: color-mix(in oklab, var(--p-ink) 26%, transparent);
 
-  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: var(--font-text);
+  --font-heading: var(--font-display);
 
-  --radius-sm: 10px;
-  --radius: 16px;
-  --radius-lg: 28px;
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 25%);
-  --shadow: 0 1px 2px rgb(0 0 0 / 25%), 0 8px 24px -8px rgb(0 0 0 / 45%);
-  --shadow-lg: 0 2px 4px rgb(0 0 0 / 25%), 0 18px 40px -12px rgb(0 0 0 / 60%);
-  --max-width: 76rem;
-  --gutter: 1rem;
-  --header-h: 4.25rem;
-}
+  --radius-sm: var(--r-sm);
+  --radius: var(--r-md);
+  --radius-lg: var(--r-lg);
+  --shadow-sm: none;
+  --shadow: 0 8px 24px -12px color-mix(in oklab, var(--p-ink) 10%, transparent);
+  --shadow-lg: 0 12px 24px -12px color-mix(in oklab, var(--p-ink) 10%, transparent);
+  --header-h: var(--nav);
 
-@media (min-width: 48rem) {
-  :root {
-    --gutter: 2rem;
-  }
+  /* os cinco níveis de evidência, legíveis sobre o fundo claro */
+  --ev-consistent: #2f6b3a;
+  --ev-limited: #6b5d0e;
+  --ev-traditional: #8a5a12;
+  --ev-insufficient: #5c5a52;
+  --ev-not-recommended: #a33a26;
 }

@@ -43,16 +43,16 @@ export default function CatalogPage({ type, title, eyebrow, intro }: Props) {
         <p className="lead">{intro}</p>
       </PageHead>
 
-      <div className="container page">
-        <div className="pills" role="group" aria-label="Categorias">
-          <button type="button" className="pill" aria-pressed={!category} onClick={() => setFilter('categoria', '')}>
+      <div className="ma-wrap page">
+        <div className="ma-pills" role="group" aria-label="Categorias">
+          <button type="button" className="ma-pill" aria-pressed={!category} onClick={() => setFilter('categoria', '')}>
             Todas
           </button>
           {typeCategories.map((c) => (
             <button
               key={c.slug}
               type="button"
-              className="pill"
+              className="ma-pill"
               aria-pressed={category === c.slug}
               onClick={() => setFilter('categoria', c.slug)}
             >
@@ -93,7 +93,7 @@ export default function CatalogPage({ type, title, eyebrow, intro }: Props) {
         </div>
 
         {results.length > 0 ? (
-          <div className="grid">
+          <div className="entry-grid">
             {results.map((item) => (
               <ContentCard key={item.slug} item={item} />
             ))}
