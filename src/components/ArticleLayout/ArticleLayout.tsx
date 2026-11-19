@@ -110,19 +110,21 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
         </div>
 
         <aside className="article-aside">
-          <nav aria-label="Nesta página" className="toc">
-            <p className="toc__title">Nesta página</p>
-            <ol>
-              {toc.map((h) => (
-                <li key={h.id}>
-                  <a href={`#${h.id}`}>{h.text}</a>
-                </li>
-              ))}
-            </ol>
-          </nav>
-          <Link className="toc__back" to={`${info.basePath}${category ? `?categoria=${category.slug}` : ''}`}>
-            ← Ver mais em {category?.name ?? info.plural}
-          </Link>
+          <div className="article-aside__sticky">
+            <nav aria-label="Nesta página" className="toc">
+              <p className="toc__title">Nesta página</p>
+              <ol>
+                {toc.map((h) => (
+                  <li key={h.id}>
+                    <a href={`#${h.id}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            <Link className="toc__back" to={`${info.basePath}${category ? `?categoria=${category.slug}` : ''}`}>
+              ← Ver mais em {category?.name ?? info.plural}
+            </Link>
+          </div>
         </aside>
       </div>
     </article>
