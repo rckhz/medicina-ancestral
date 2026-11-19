@@ -1,0 +1,22 @@
+# dependências e build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# ambiente / editor
+.env
+.env.*
+*.local
+.vercel/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# arquivos de trabalho (fotos originais e anotações)
+/imagem logo.jpg
+/photo-*.avif
+/pisauikan-*.jpg
+/plantas-medicinais-arquivo-agencia-belem.webp
+/veja isso claude.txt
