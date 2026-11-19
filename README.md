@@ -130,7 +130,7 @@ src/
 
 - **Frontmatter:** usamos o pacote `yaml` em vez de `gray-matter`, porque o `gray-matter` depende de APIs do Node (`Buffer`, `fs`) e quebra no navegador.
 - **Busca:** local, sem acentos e sem diferenciar maiúsculas; pesquisa título, nomes de plantas, palavras-chave, categoria e texto.
-- **Visual:** estilo "botânico editorial" em tema escuro — fontes Fraunces (títulos) e Inter (texto) via Google Fonts, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon` (cada categoria tem um `icon` em `data/categories.ts`).
+- **Visual:** estilo "botânico editorial" em tema escuro — fontes Cormorant Garamond (títulos) e DM Sans (texto) via Google Fonts, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon` (cada categoria tem um `icon` em `data/categories.ts`).
 - **Vercel:** `vercel.json` redireciona todas as rotas para `index.html` (fallback de SPA).
 
 </details>
