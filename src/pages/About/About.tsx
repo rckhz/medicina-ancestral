@@ -8,7 +8,7 @@ export default function About() {
   useDocumentTitle('Sobre')
   return (
     <>
-    <PageHead eyebrow="Quem somos" title="Sobre o projeto">
+    <PageHead title="Sobre o projeto">
       <p className="lead">
         O Medicina Ancestral é um projeto de educação em saúde que reúne conhecimentos sobre plantas
         medicinais, preparações caseiras e práticas tradicionais de cuidado.

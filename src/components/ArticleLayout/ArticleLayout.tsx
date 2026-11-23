@@ -50,9 +50,6 @@ export default function ArticleLayout({ item }: { item: ContentItem }) {
           </nav>
 
           <div className="article-hero__inner">
-            <span className="article-hero__icon">
-              <Icon name={category?.icon ?? 'leaf'} />
-            </span>
             <div>
               <h1>{item.title}</h1>
               {latin && <p className="article-hero__latin">{latin}</p>}

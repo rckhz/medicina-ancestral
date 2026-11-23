@@ -11,11 +11,10 @@ import type { EvidenceLevel } from '../../types/content'
 
 const suggestions = ['alho', 'alecrim', 'tosse', 'sono', 'digestão']
 
-function SectionHead({ id, eyebrow, title, link }: { id: string; eyebrow: string; title: string; link?: { to: string; label: string } }) {
+function SectionHead({ id, title, link }: { id: string; title: string; link?: { to: string; label: string } }) {
   return (
     <div className="section-head">
       <div>
-        <p className="eyebrow">{eyebrow}</p>
         <h2 id={id}>{title}</h2>
       </div>
       {link && (
@@ -41,11 +40,9 @@ export default function Home() {
           <img className="hero__bg" src="/images/hero-babosa.jpg" alt="" aria-hidden="true" fetchPriority="high" />
         </picture>
         <div className="container hero__inner">
-          <p className="eyebrow">Plantas medicinais · Chás · Cuidados naturais</p>
           <h1 className="hero__title">
             Medicina <em>Ancestral</em>
           </h1>
-          <p className="hero__tagline">Saberes das plantas, com ciência e cuidado.</p>
           <p className="lead">
             Informações em linguagem simples sobre plantas medicinais, preparações tradicionais e condições de
             saúde — separando o que é uso popular do que a pesquisa científica já confirmou.
@@ -67,7 +64,6 @@ export default function Home() {
           <section aria-labelledby="h-plantas" className="home__section">
             <SectionHead
               id="h-plantas"
-              eyebrow="Herbário"
               title="Plantas medicinais"
               link={{ to: '/preparacoes?categoria=plantas-medicinais', label: 'Ver todas as plantas' }}
             />
@@ -83,7 +79,6 @@ export default function Home() {
           <section aria-labelledby="h-preparacoes" className="home__section">
             <SectionHead
               id="h-preparacoes"
-              eyebrow="Receitas tradicionais"
               title="Chás e preparações"
               link={{ to: '/preparacoes', label: 'Ver todas as preparações' }}
             />
@@ -98,7 +93,6 @@ export default function Home() {
         <section aria-labelledby="h-categorias" className="home__section">
           <SectionHead
             id="h-categorias"
-            eyebrow="Para cada necessidade"
             title="Condições por categoria"
             link={{ to: '/categorias', label: 'Ver todas as categorias' }}
           />
@@ -113,7 +107,6 @@ export default function Home() {
 
         <section aria-labelledby="h-evidencias" className="home__section evidence-panel">
           <div className="evidence-panel__intro">
-            <p className="eyebrow">Transparência</p>
             <h2 id="h-evidencias">Como ler as evidências</h2>
             <p>
               Cada uso recebe uma classificação, considerando a finalidade específica — não apenas a planta.

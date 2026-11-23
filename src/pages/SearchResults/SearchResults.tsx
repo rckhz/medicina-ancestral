@@ -14,7 +14,7 @@ export default function SearchResults() {
 
   return (
     <>
-      <PageHead eyebrow="Busca" title={q ? `Resultados para “${q}”` : 'Pesquisar'}>
+      <PageHead title={q ? `Resultados para “${q}”` : 'Pesquisar'}>
         <Search defaultValue={q} variant="hero" />
       </PageHead>
 

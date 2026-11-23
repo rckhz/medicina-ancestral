@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { getCategory, typeInfo } from '../../data/categories'
+import { typeInfo } from '../../data/categories'
 import type { ContentItem } from '../../types/content'
 import EvidenceBadge from '../EvidenceBadge/EvidenceBadge'
 import Icon from '../Icon/Icon'
@@ -11,16 +11,9 @@ function scientificName(item: ContentItem): string | undefined {
 
 /** Cartão resumido de uma condição ou preparação. */
 export default function ContentCard({ item }: { item: ContentItem }) {
-  const category = getCategory(item.type, item.category)
   const latin = scientificName(item)
   return (
     <article className="card">
-      <div className="card__top">
-        <span className="card__icon">
-          <Icon name={category?.icon ?? 'leaf'} />
-        </span>
-        <span className="card__eyebrow">{category?.name}</span>
-      </div>
       <h3>
         <Link to={`${typeInfo[item.type].basePath}/${item.slug}`} className="card__link">
           {item.title}

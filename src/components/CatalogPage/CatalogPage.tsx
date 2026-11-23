@@ -10,12 +10,11 @@ import PageHead from '../PageHead/PageHead'
 interface Props {
   type: ContentType
   title?: string
-  eyebrow: string
   intro: string
 }
 
 /** Catálogo com filtros (texto, categoria, evidência) guardados na URL. */
-export default function CatalogPage({ type, title, eyebrow, intro }: Props) {
+export default function CatalogPage({ type, title, intro }: Props) {
   const { plural } = typeInfo[type]
   const heading = title ?? plural
   useDocumentTitle(heading)
@@ -39,7 +38,7 @@ export default function CatalogPage({ type, title, eyebrow, intro }: Props) {
 
   return (
     <>
-      <PageHead eyebrow={eyebrow} title={heading}>
+      <PageHead title={heading}>
         <p className="lead">{intro}</p>
       </PageHead>
 

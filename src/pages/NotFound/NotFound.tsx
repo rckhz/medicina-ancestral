@@ -6,7 +6,7 @@ export default function NotFound() {
   useDocumentTitle('Página não encontrada')
   return (
     <>
-      <PageHead eyebrow="Erro 404" title="Página não encontrada">
+      <PageHead title="Página não encontrada">
         <p className="lead">O endereço pode estar incorreto ou o conteúdo foi removido.</p>
       </PageHead>
       <div className="container page">

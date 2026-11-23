@@ -5,7 +5,6 @@ export default function Preparations() {
     <CatalogPage
       type="preparation"
       title="Plantas e preparações"
-      eyebrow="Herbário"
       intro="Fichas de plantas medicinais, chás e preparações naturais, com modo de preparo, evidências e contraindicações."
     />
   )

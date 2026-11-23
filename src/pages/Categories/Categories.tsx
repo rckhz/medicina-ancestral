@@ -7,7 +7,7 @@ export default function Categories() {
   useDocumentTitle('Categorias')
   return (
     <>
-      <PageHead eyebrow="Explorar" title="Categorias">
+      <PageHead title="Categorias">
         <p className="lead">Navegue pelos temas de saúde e pelos tipos de preparação.</p>
       </PageHead>
 
