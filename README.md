@@ -44,6 +44,8 @@ referências — e um selo que mostra **quanta evidência científica existe** p
 | ✍️ **Fácil de editar** | Novos artigos são só arquivos Markdown — sem banco de dados, sem backend. |
 
 <div align="center">
+  <img src="docs/catalogo.jpg" alt="Catálogo de plantas e preparações em três colunas" width="100%" />
+  <br /><br />
   <img src="docs/preparacao.jpg" alt="Página de uma planta medicinal (Alho)" width="72%" />
   &nbsp;
   <img src="docs/mobile.jpg" alt="Versão mobile" width="22%" />
@@ -106,7 +108,7 @@ src/
 
 - **Frontmatter:** usamos o pacote `yaml` em vez de `gray-matter`, porque o `gray-matter` depende de APIs do Node (`Buffer`, `fs`) e quebra no navegador.
 - **Busca:** local, sem acentos e sem diferenciar maiúsculas; pesquisa título, nomes de plantas, palavras-chave, categoria e texto.
-- **Visual:** estilo "botânico editorial" em tema escuro — fontes Cormorant Garamond (títulos) e DM Sans (texto) via Google Fonts, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon` (cada categoria tem um `icon` em `data/categories.ts`).
+- **Visual:** estilo "botânico editorial" em tema escuro — fontes Literata (títulos) e Hanken Grotesk (texto) via Google Fonts, hero com foto, catálogo em três colunas sem cartões, selos de evidência planos, paleta em `src/styles/variables.css`, ícones SVG próprios em `components/Icon`.
 
 </details>
 
