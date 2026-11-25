@@ -45,7 +45,7 @@ export default function Home() {
           </h1>
           <p className="lead">
             Informações em linguagem simples sobre plantas medicinais, preparações tradicionais e condições de
-            saúde — separando o que é uso popular do que a pesquisa científica já confirmou.
+            saúde, separando o que é uso popular do que a pesquisa científica já confirmou.
           </p>
           <Search variant="hero" />
           <p className="hero__chips">
@@ -109,7 +109,7 @@ export default function Home() {
           <div className="evidence-panel__intro">
             <h2 id="h-evidencias">Como ler as evidências</h2>
             <p>
-              Cada uso recebe uma classificação, considerando a finalidade específica — não apenas a planta.
+              Cada uso recebe uma classificação, considerando a finalidade específica, não apenas a planta.
               Assim fica claro o que é tradição e o que já foi confirmado por estudos.
             </p>
             <Link to="/sobre" className="link-arrow">

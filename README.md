@@ -6,7 +6,7 @@
 
 **Saberes das plantas, com ciência e cuidado.**
 
-Informações em linguagem simples sobre plantas medicinais, preparações tradicionais e condições de saúde —
+Informações em linguagem simples sobre plantas medicinais, preparações tradicionais e condições de saúde,
 separando o que é uso popular do que a pesquisa científica já confirmou.
 
 ![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react&logoColor=white)
